@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/features/Navbar";
 import { PageLayout } from "@/layout/PageLayout";
+import { Home } from "@/pages/Home";
 import { Outlet, Router, Route, RootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
@@ -18,24 +19,32 @@ const rootRoute = new RootRoute({
 const indexRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: function Index() {
-    return (
-      <div className="p-2">
-        <h3>Index Page</h3>
-      </div>
-    );
-  },
+  component: Home,
 });
 
 const aboutRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/about",
   component: function About() {
-    return <div className="p-2">About Page</div>;
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        About Page
+      </div>
+    );
   },
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, aboutRoute]);
+const register = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/auth",
+  component: function About() {
+    return (
+      <div className="flex h-full w-full items-center justify-center">Auth</div>
+    );
+  },
+});
+
+const routeTree = rootRoute.addChildren([indexRoute, aboutRoute, register]);
 
 export const router = new Router({ routeTree });
 
