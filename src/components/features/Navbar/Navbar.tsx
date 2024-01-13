@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
   return (
-    <NavigationMenu className="flex justify-between max-w-full">
+    <NavigationMenu className="flex max-w-full justify-between">
       <NavigationMenuList>
         <Link to={"/"}>
           <NavigationMenuItem className={navigationMenuTriggerStyle()}>
@@ -19,6 +19,11 @@ export const Navbar = () => {
         <Link to="/about">
           <NavigationMenuItem className={navigationMenuTriggerStyle()}>
             About
+          </NavigationMenuItem>
+        </Link>
+        <Link to="/missions">
+          <NavigationMenuItem className={navigationMenuTriggerStyle()}>
+            Missions
           </NavigationMenuItem>
         </Link>
       </NavigationMenuList>
