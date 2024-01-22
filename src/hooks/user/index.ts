@@ -1,6 +1,10 @@
 import { user } from "@/api";
 import { UserWithId } from "@/api/user/types";
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  queryOptions,
+  useMutation,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 
 export const useUsers = () => {
   return useSuspenseQuery<UserWithId[]>({
@@ -13,6 +17,13 @@ export const useUser = (id: string) => {
   return useSuspenseQuery<UserWithId>({
     queryKey: ["user", id],
     queryFn: () => user.get(id),
+  });
+};
+
+export const usePostUser = () => {
+  return useMutation({
+    mutationFn: user.post,
+    mutationKey: ["postUser"],
   });
 };
 

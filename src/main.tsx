@@ -63,21 +63,26 @@ const missionsRoute = new Route({
     ]),
 });
 
-const register = new Route({
+const registerRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/auth",
-  component: function About() {
-    return (
-      <div className="flex h-full w-full items-center justify-center">Auth</div>
-    );
-  },
+  component: Pages.AuthPage,
 });
+
+const registerToOrganization = new Route({
+  getParentRoute: () => registerRoute,
+  path: `$organizationId`,
+  beforeLoad: () => console.log("auth with orgid"),
+  component: Pages.AuthPage,
+});
+
+const registerTree = registerRoute.addChildren([registerToOrganization]);
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
   aboutRoute,
   missionsRoute,
-  register,
+  registerTree,
 ]);
 
 export const router = new Router({

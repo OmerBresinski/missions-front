@@ -3,6 +3,7 @@ import {
   type Organization,
   type OrganizationWithId,
 } from "@/api/organization/types";
+import { User } from "../user/types";
 
 export const getAll = async (): Promise<OrganizationWithId[]> => {
   const response = await fetch(`${BASE_URL}/organization`);
@@ -20,15 +21,23 @@ export const get = async (id: string): Promise<OrganizationWithId> => {
 
 export const post = async ({
   organization,
+  user,
 }: {
   organization: Organization;
+  user: User;
 }): Promise<OrganizationWithId> => {
   const response = await fetch(`${BASE_URL}/organization`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ organization }),
+    body: JSON.stringify({
+      organizationName: organization.name,
+      industry: organization.industry,
+      userName: user.name,
+      email: user.email,
+      password: user.password,
+    }),
   });
   const organizationData = await response.json();
 
